@@ -1,6 +1,9 @@
 import { BookOpen, Pen, Heart } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  
   const highlights = [
     {
       icon: BookOpen,
@@ -20,10 +23,15 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-card">
+    <section id="about" className="py-24 bg-card overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
+          <div 
+            ref={titleRef}
+            className={`text-center mb-16 transition-all duration-1000 ${
+              titleVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`}
+          >
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
               About Me
             </h2>
@@ -37,15 +45,20 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {highlights.map((item, index) => {
               const Icon = item.icon;
+              const { ref, isVisible } = useScrollAnimation(0.2);
+              
               return (
                 <div 
                   key={index}
-                  className="group p-8 bg-background border border-border hover:border-primary transition-all duration-300 hover:shadow-lg animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  ref={ref}
+                  className={`group p-8 bg-background border border-border hover:border-primary transition-all duration-500 hover:shadow-lg ${
+                    isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                  }`}
+                  style={{ animationDelay: `${index * 0.15}s` }}
                 >
                   <div className="mb-6">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-8 h-8 text-primary" />
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 group-hover:animate-float">
+                      <Icon className="w-8 h-8 text-primary transition-transform group-hover:scale-110" />
                     </div>
                   </div>
                   <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">

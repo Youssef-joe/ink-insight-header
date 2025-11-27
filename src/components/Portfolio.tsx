@@ -1,7 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Portfolio = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  
   const projects = [
     {
       title: "The Art of Storytelling",
@@ -30,10 +33,15 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-24 bg-card">
+    <section id="portfolio" className="py-24 bg-card overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
+          <div 
+            ref={titleRef}
+            className={`text-center mb-16 transition-all duration-1000 ${
+              titleVisible ? 'animate-fade-in-up' : 'opacity-0'
+            }`}
+          >
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-6">
               Featured Work
             </h2>
@@ -43,40 +51,50 @@ const Portfolio = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card 
-                key={index}
-                className="group hover:shadow-lg transition-all duration-300 border-border hover:border-primary animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardHeader>
-                  <div className="mb-2">
-                    <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
-                      {project.category}
-                    </Badge>
-                  </div>
-                  <CardTitle className="font-serif text-2xl group-hover:text-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-base pt-2">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, tagIndex) => (
-                      <Badge 
-                        key={tagIndex} 
-                        variant="outline"
-                        className="border-border text-muted-foreground"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {projects.map((project, index) => {
+              const { ref, isVisible } = useScrollAnimation(0.2);
+              const animationClass = index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right';
+              
+              return (
+                <div
+                  key={index}
+                  ref={ref}
+                  className={`transition-all duration-1000 ${
+                    isVisible ? animationClass : 'opacity-0'
+                  }`}
+                  style={{ animationDelay: `${(index % 2) * 0.15}s` }}
+                >
+                  <Card className="group h-full hover:shadow-lg transition-all duration-500 border-border hover:border-primary hover:-translate-y-1">
+                    <CardHeader>
+                      <div className="mb-2">
+                        <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                          {project.category}
+                        </Badge>
+                      </div>
+                      <CardTitle className="font-serif text-2xl group-hover:text-primary transition-colors duration-300">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-base pt-2">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, tagIndex) => (
+                          <Badge 
+                            key={tagIndex} 
+                            variant="outline"
+                            className="border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

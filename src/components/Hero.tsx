@@ -14,9 +14,16 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
       </div>
 
+      {/* Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-float" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-primary/25 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+      </div>
+
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
+        <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-foreground">
             Book Lover &<br />
             <span className="text-primary">Content Writer</span>

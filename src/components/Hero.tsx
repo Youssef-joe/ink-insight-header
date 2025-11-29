@@ -24,9 +24,10 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-foreground">
-            Book Lover &<br />
-            <span className="text-primary">Content Writer</span>
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-foreground">
+            <span className="text-primary drop-shadow-lg animate-fade-in-up font-black tracking-wider">Nour</span> <span className="text-slate-900 drop-shadow-lg animate-fade-in-up font-black tracking-wider" style={{ animationDelay: '0.1s' }}>Serag</span> <br />
+            <span className="text-2xl md:text-3xl font-normal text-muted-foreground">Book Lover &</span>
+            <span className="text-2xl md:text-3xl font-normal text-primary">Content Writer</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -52,12 +53,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-primary rounded-full" />
-          </div>
-        </div>
       </div>
     </section>
   );

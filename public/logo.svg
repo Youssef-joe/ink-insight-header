@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <style>
+      .ink-color { fill: #8B5CF6; }
+      .accent-color { fill: #06B6D4; }
+    </style>
+  </defs>
+  
+  <!-- Book -->
+  <path class="ink-color" d="M 60 50 L 80 50 L 80 200 C 80 210 75 220 65 220 C 55 220 50 210 50 200 L 50 50 Z" opacity="0.9"/>
+  <path class="ink-color" d="M 80 50 L 160 50 L 160 200 C 160 210 155 220 145 220 L 80 220 Z" opacity="0.7"/>
+  
+  <!-- Pen/Quill -->
+  <g transform="translate(150, 70) rotate(-30)">
+    <path class="accent-color" d="M 0 0 L 3 40 L 0 50 L -3 40 Z"/>
+    <circle class="accent-color" cx="0" cy="55" r="4"/>
+    <path class="ink-color" d="M -2 0 Q -4 15 -5 30 L 5 30 Q 4 15 2 0 Z" opacity="0.8"/>
+  </g>
+  
+  <!-- Decorative flourish -->
+  <path class="accent-color" d="M 120 140 Q 125 145 130 140" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+</svg>
